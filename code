@@ -1,0 +1,73 @@
+import RPi.GPIO as GPIO #this puts the GPIO in the program always has to be first. # rover
+
+sleep (5) #this stops the pi from doing something straight away and makes it wait.
+
+
+GPIO.setmode(GPIO.BCM) #sets the mide of the pi to Bcm this is always the second.
+
+GPIO.setup(17,GPIO.OUT) #TELLS THE pi that u what number on the GPIO you will be useing.
+GPIO.setup(23,GPIO.OUT
+GPIO.setup(24,GPIO.OUT)    
+GPIO.setup(27,GPIO.OUT)  
+           
+GPIO.output(23,GPIO.HIGH #turns the pi on
+GPIO.output(24,GPIO.HIGH
+GPIO.output(27,GPIO.HIGH
+GPIO.output(17,GPIO.HIGH
+           
+GPIO.output(23,GPIO.LOW) #turns it off
+GPIO.output(24,GPIO.LOW)
+GPIO.output(27,GPIO.LOW)  
+GPIO.output(17,GPIO.LOW)         
+
+
+                        
+ def motars():
+                       
+ print("THIS SHOULD WORK")
+                        
+ GPIO.cleanup()                 
+ 
+ bag = ["chicken" , "Tom hanks" , "christmas cake"]
+
+for item in bag:       #this will make a item go each time
+ print(item)     #this will make the item print on the list
+
+                                #now heres a more advanced loop :8
+bag = ["chicken" , "Tom hanks" , "christmas cake"]
+  
+
+ for item in bag: #starts to look through the bag for the item u want
+  if item == "chicken":       #checks if item is in the bag
+ print("dammmmm thats some nice chicken")
+
+else:
+  print("hmmmmmmm thats noT CHICKEN")
+  
+  
+  import subprocess
+import smtplib
+import socket
+from email.mime.text import MIMEText
+import datetime
+#account info
+to = 'RPiTime@gmail.com'
+gmail_user = 'RPiTime@gmail.com'
+gmail_password = '12345616'
+smtpserver = smtplib.SMTP('smtp.gmail.com', 587)
+smtpserver.ehlo()
+smtpserver.starttls()
+smtpserver.login(gmail_user, gmail_password)
+today = datetime.date.today()
+arg='ip route list'
+p=subprocess.Popen(arg,shell=True,stdout=subprocess.PIPE)
+data=p.communicate()
+split_data=data[0].split()
+ipaddr=split_data[split_data.index('src')+1]
+my_ip='Good day human overlord. This is your humble pi. My ip today is %s' % ipaddr
+msg=MIMEText(my_ip)
+msg['Subject']= 'Rpi2 Reporting in!'
+msg['From']= gmail_user
+msg['To'] = to
+smtpserver.sendmail(gmail_user, [to], msg.as_string())
+smtpserver.quit()
